@@ -1,0 +1,35 @@
+
+body
+  overflow-x: hidden
+
+.main-container
+  .header-text
+    display: flex;
+    justify-content: center;
+
+  .map-container
+    display: flex
+    justify-content: center
+    transform: translate(-1%, -50%);
+
+    .map-wrapper
+      height: 53rem
+      transform: rotate(-9deg)
+      position: absolute
+
+      path
+        fill: #52BE80
+        stroke: rgb(255, 255, 255);
+
+        &.hovered
+          fill: green
+
+    @media screen and (max-width: 650px)
+      transform: translate(-4%)
+      .map-wrapper
+        height: 28.5rem
+    
+    
+    @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none)
+      .map-wrapper
+        transform: translate(-50%);
