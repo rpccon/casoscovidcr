@@ -11,20 +11,13 @@ class MainPage extends Component {
     this.state = {
       provinces:null,
       hovered:"hovered",
-      selectedProvinceId:"alajuela",
+      selectedProvinceId:"guanacaste",
+      firstProvinceHovered: false,
       confirmation: false,
       headerText: "Casos COVID-19 CR"
     }
 
    // this._askForConfirmation();
-  }
-
-  _setFirstProvinceSelected() {//determinar cuando se finaliza de cargar para tomar el elemento del DOM
-    const { hovered } = this.state;// y agregar la clase de hover para que lo auto seleccione
-    const currentProvince = this._getCurrentProvince();
-  //  console.log("called", currentProvince);
-   // console.log($("#alajuela"));
-  //   $(currentProvince).addClass(hovered);
   }
 
   _getCurrentProvince() {
@@ -51,16 +44,10 @@ class MainPage extends Component {
   }
 
   _onProvinceHover = (context) => {
-    const { provinces, hovered } = this.state
+    const { hovered } = this.state
     const { currentTarget, srcElement } = context
     const eventTarget = currentTarget ? currentTarget : srcElement
     const currentProvinceId = $(eventTarget).attr("id");
-
-    if(!provinces) {
-      const newProvinces = this._convertNodeListInArray($(eventTarget).parent()[0].querySelectorAll("path"));
-
-      this.setState({ provinces: newProvinces });
-    }
 
     if(!$(eventTarget).hasClass(hovered)) {
       this._cleanProvincesSelected();
@@ -74,7 +61,7 @@ class MainPage extends Component {
   _askForConfirmation() {
     const password = prompt("password", '');
 
-    if(password === "90640") {
+    if(password === "") {
       this.setState({ confirmation: true });
       //this.state.confirmation = true; //({ confirmation: true });
     } else {
@@ -83,23 +70,48 @@ class MainPage extends Component {
   }
 
   componentDidMount() {
-    this._askForConfirmation()
+    const { firstProvinceHovered, hovered } = this.state
+
+    if(!firstProvinceHovered) {
+      const currentElement = this._getCurrentProvince()
+      const [ currentProvince ] = currentElement
+      const { id } = currentProvince
+
+      const theseProvincesDom = $(".main-container .map-container svg path");
+      const theseProvincesArray = this._convertNodeListInArray(theseProvincesDom);
+
+      theseProvincesArray.forEach(element => {
+        const thisProvince = $(element)
+
+        if(thisProvince.attr("id") === id) {
+          thisProvince.addClass(hovered);
+        }
+      });
+
+      this.setState({ firstProvinceHovered: true, provinces: theseProvincesArray });
+    }
   }
 
   render() {
-   const { confirmation, headerText } = this.state
-
+   const { headerText } = this.state
+    //confirmation 
     return (
       <div className="main-container">
-        <div class="header-text">
+        <div className="header-text">
           <h1>{headerText}</h1>
         </div>
-        {confirmation
+        {/*confirmation
           && <div className="map-container">
             <SVGMap map={Costarica} className={"map-wrapper"} onLocationClick={this._onProvinceHover} />
-            <div>Provincia: {this._getCurrentProvince()[0].name}</div>
           </div>
-        }
+        */}
+        <div className="map-container">
+          <SVGMap map={Costarica} className={"map-wrapper"} onLocationClick={this._onProvinceHover} />
+        </div>
+        <div className="map-text-container">
+          <div className="province-title"><div>Provincia:</div> <strong>{this._getCurrentProvince()[0].name}</strong></div>
+        </div>
+        
       </div>
     )
   }
