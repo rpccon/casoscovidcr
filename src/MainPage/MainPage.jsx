@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import Costarica from "../map/countryObject"
+import Collapsible from "../Collapsible/Collapsible"
 import { SVGMap } from "react-svg-map"
 import $ from "jquery"
 import "./MainPage.sass"
@@ -11,13 +12,14 @@ class MainPage extends Component {
     this.state = {
       provinces:null,
       hovered:"hovered",
-      selectedProvinceId:"guanacaste",
+      selectedProvinceId:"1",
       firstProvinceHovered: false,
       confirmation: false,
-      headerText: "Casos COVID-19 CR"
+      headerText: "Casos COVID-19 CR",
+      dataCases: []
     }
 
-   // this._askForConfirmation();
+   this.filterDataFromSelectedProvince();
   }
 
   _getCurrentProvince() {
@@ -94,12 +96,24 @@ class MainPage extends Component {
     this.getDatasets();
   }
 
-  async getDatasets() {
-    const response = await fetch("https://casoscovidcrbe.herokuapp.com/get-data-set-sesion", {
-      method: 'POST'
-    });
+  getDatasets() {
+    const { dataCases } = this.state;
 
-    console.log("got answer", response);
+    fetch("https://casoscovidcrbe.herokuapp.com/get-data-set-sesion", {method: "POST"})
+    .then(res => res.json())
+    .then(
+      (response) => {
+        console.log(response.result);
+        this.setState({ dataCases: response.result});
+      }
+    )
+  }
+
+  filterDataFromSelectedProvince() {
+    const { selectedProvinceId, dataCases } = this.state
+    const filteredList = dataCases.filter((item) =>  (item.idprovincia.toString() === selectedProvinceId));
+
+    return filteredList
   }
 
   render() {
@@ -121,7 +135,7 @@ class MainPage extends Component {
         <div className="map-text-container">
           <div className="province-title"><div>Provincia:</div> <strong>{this._getCurrentProvince()[0].name}</strong></div>
         </div>
-        
+        <Collapsible dataCases={this.filterDataFromSelectedProvince()}/>
       </div>
     )
   }
