@@ -1,7 +1,34 @@
-.collapsible-container
-  display: flex
-  flex-direction: column
-  justify-content: center
-  justify-items: center
-  align-items: center
-  margin-top: 24rem
+.collapsible
+  position: absolute
+  width: 100%
+  top: 33rem
+  z-index: 100
+
+  .collapsible-container
+    display: flex
+    flex-direction: column
+    justify-content: center
+    justify-items: center
+    align-items: center
+    margin-left: 2rem
+
+    .item-collapsible
+      width: 41rem
+
+      button, div
+        width: 100%
+
+  @media screen and (max-width: 1061px)
+    .collapsible-container
+        .item-collapsible
+            width: 34rem
+            
+    
+  @media screen and (max-width: 650px)
+    top: 20rem
+
+    .collapsible-container
+      margin-left: 0
+
+      .item-collapsible
+        width: 88%

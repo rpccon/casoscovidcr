@@ -19,15 +19,17 @@ class Collapsible extends Component {
     const { dataCases } = this.state
 
     return (
-      <div className="collapsible-container">
-        {
-          dataCases.map((item) => (
-            <div key={`${item.id}-item-collapsible`} className="item-collapsible">
-              <button>{item.nombre}</button>
-              <div>tableData</div>
-            </div>
-          ))
-        }
+      <div className="collapsible">
+        <div className="collapsible-container">
+          {
+            dataCases.map((item) => (
+              <div key={`${item.id}-item-collapsible`} className="item-collapsible">
+                <button>{item.nombre}</button>
+                <div>tableData</div>
+              </div>
+            ))
+          }
+        </div>
       </div>
     )
   }
