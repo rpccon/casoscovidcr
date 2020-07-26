@@ -90,6 +90,16 @@ class MainPage extends Component {
 
       this.setState({ firstProvinceHovered: true, provinces: theseProvincesArray });
     }
+
+    this.getDatasets();
+  }
+
+  async getDatasets() {
+    const response = await fetch("https://casoscovidcrbe.herokuapp.com/get-data-set-sesion", {
+      method: 'POST'
+    });
+
+    console.log("got answer", response);
   }
 
   render() {
