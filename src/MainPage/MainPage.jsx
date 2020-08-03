@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import Costarica from "../map/countryObject"
 import Collapsible from "../Collapsible/Collapsible"
 import { SVGMap } from "react-svg-map"
+import runApiServer from "../service.config"
 import $ from "jquery"
 import "./MainPage.sass"
 
@@ -71,6 +72,9 @@ class MainPage extends Component {
     }
   }
 
+  componentWillReceiveProps(newProps) {
+    console.log("newProps", newProps);
+  }
   componentDidMount() {
     const { firstProvinceHovered, hovered } = this.state
 
@@ -99,18 +103,33 @@ class MainPage extends Component {
   getDatasets() {
     const { dataCases } = this.state;
 
-    fetch("https://casoscovidcrbe.herokuapp.com/get-data-set-sesion", {method: "POST"})
+    runApiServer(0, "POST").then(
+      (resolvedValue) => {
+        const { response } = resolvedValue; // falta validar cuando hay un error OJO
+
+        this.setState({ dataCases: response });
+        //console.log("END THE PROCESS", resolvedValue);
+      }
+    )
+
+    // const result = runApiServer(0, "POST", this, "dataCases");
+
+   // console.log("FINAL RESULT", result);
+
+    /*fetch("https://casoscovidcrbe.herokuapp.com/get-data-set-sesion", {method: "POST"})
     .then(res => res.json())
     .then(
       (response) => {
         console.log(response.result);
         this.setState({ dataCases: response.result});
       }
-    )
+    ) */
   }
 
   filterDataFromSelectedProvince() {
     const { selectedProvinceId, dataCases } = this.state
+
+    console.log("In functio nana", dataCases);
     const filteredList = dataCases.filter((item) =>  (item.idprovincia.toString() === selectedProvinceId));
 
     return filteredList

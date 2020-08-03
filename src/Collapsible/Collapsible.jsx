@@ -12,11 +12,14 @@ class Collapsible extends Component {
   }
 
   componentWillReceiveProps(newProps) {
+    console.log("ddfsfd", newProps);
     this.setState({ dataCases: newProps.dataCases});
   }
 
   render() {
     const { dataCases } = this.state
+    console.log("try to render", dataCases);
+    
 
     return (
       <div className="collapsible">
@@ -24,7 +27,7 @@ class Collapsible extends Component {
           {
             dataCases.map((item) => (
               <div key={`${item.id}-item-collapsible`} className="item-collapsible">
-                <button>{item.nombre}</button>
+                <div className="btn-collapse"><div className="name">{item.nombre}</div><div className="arrow"></div></div>
                 <div>tableData</div>
               </div>
             ))
