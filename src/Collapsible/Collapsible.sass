@@ -27,6 +27,9 @@
         border: 2px solid #000000
         border-radius: 6px
 
+        &:hover
+          background-color: #2F5E82
+
         .name
           padding-top: 10px
           padding-left: 3rem
@@ -35,6 +38,12 @@
 
         .arrow
           width: 8%
+
+      .content-collapse
+        display: none
+
+        &.active
+          display: block
 
   @media screen and (max-width: 1061px)
     .collapsible-container

@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import $ from "jquery"
 import "./Collapsible.sass"
 
 class Collapsible extends Component {
@@ -12,14 +11,22 @@ class Collapsible extends Component {
   }
 
   componentWillReceiveProps(newProps) {
-    console.log("ddfsfd", newProps);
-    this.setState({ dataCases: newProps.dataCases});
+    this.setState({ dataCases: newProps.dataCases})
+  }
+
+  onItemCollapsibleClick = (context) => {
+    const parentTargetElement = context.target.parentElement
+    const contentElement = parentTargetElement.nextElementSibling
+
+    if(!contentElement.classList.contains("active")) {
+      contentElement.classList.add("active")
+    } else {
+      contentElement.classList.remove("active")
+    }
   }
 
   render() {
     const { dataCases } = this.state
-    console.log("try to render", dataCases);
-    
 
     return (
       <div className="collapsible">
@@ -27,8 +34,8 @@ class Collapsible extends Component {
           {
             dataCases.map((item) => (
               <div key={`${item.id}-item-collapsible`} className="item-collapsible">
-                <div className="btn-collapse"><div className="name">{item.nombre}</div><div className="arrow"></div></div>
-                <div>tableData</div>
+                <div className="btn-collapse" onClick={this.onItemCollapsibleClick}><div className="name">{item.nombre}</div><div className="arrow"></div></div>
+                <div className="content-collapse">tableData</div>
               </div>
             ))
           }
