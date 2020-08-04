@@ -3,12 +3,26 @@ body
   overflow-x: hidden
 
 .main-container
+  .date-content
+    text-align: end
+    font-weight: bold
+
+    strong
+      display: none
+
+    &.desktop
+      padding-right: 3rem
+      padding-top: 11px
+    
+    &:not(.desktop)
+      display: none
+
   .header-text
-    display: flex;
-    justify-content: center;
+    display: flex
+    justify-content: center
 
   .map-text-container
-    width: 42%;
+    width: 42%
     position: absolute
     top: 24rem
 
@@ -39,6 +53,31 @@ body
 
         &.hovered
           fill: green
+
+  @media screen and (max-width: 1061px)
+    .date-content
+      display: flex
+      flex-direction: row
+      justify-content: center
+      font-size: 13px
+      font-weight: normal
+
+      strong
+        display: block
+
+      &.desktop
+        display: none
+      &:not(.desktop)
+        display: flex
+        flex-direction: row
+        justify-content: center
+
+    .header-text
+      flex-direction: column
+      text-align: center
+
+      h1
+        margin-bottom: 6px
 
   @media screen and (max-width: 650px)
     .map-container

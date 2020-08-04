@@ -17,7 +17,8 @@ class MainPage extends Component {
       firstProvinceHovered: false,
       confirmation: false,
       headerText: "Casos COVID-19 CR",
-      dataCases: []
+      dataCases: [],
+      lastDateUpdated: "20/05/2019"
     }
   }
 
@@ -94,6 +95,15 @@ class MainPage extends Component {
     this.getDatasets();
   }
 
+  getLastDataUpdated(version) {
+    const { lastDateUpdated } = this.state
+    const classNameText = `date-content ${version ? version : ""}`
+
+    return (
+      <div className={classNameText}><strong>(</strong>Actualizado al: {lastDateUpdated}<strong>)</strong></div>
+    )
+  }
+
   getDatasets() {
     runApiServer(0, "POST").then(
       (resolvedValue) => {
@@ -111,12 +121,14 @@ class MainPage extends Component {
   }
 
   render() {
-    const { headerText, dataCases } = this.state
+    const { headerText, dataCases, lastDateUpdated } = this.state
 
     return (
       <div className="main-container">
+        {this.getLastDataUpdated("desktop")}
         <div className="header-text">
           <h1>{headerText}</h1>
+          {this.getLastDataUpdated()}
         </div>
         <div className="map-container">
           <SVGMap map={Costarica} className={"map-wrapper"} onLocationClick={this._onProvinceHover} />
