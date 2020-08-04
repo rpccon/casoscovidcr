@@ -19,8 +19,6 @@ class MainPage extends Component {
       headerText: "Casos COVID-19 CR",
       dataCases: []
     }
-
-   this.filterDataFromSelectedProvince();
   }
 
   _getCurrentProvince() {
@@ -66,15 +64,11 @@ class MainPage extends Component {
 
     if(password === "") {
       this.setState({ confirmation: true });
-      //this.state.confirmation = true; //({ confirmation: true });
     } else {
       this.setState({ headerText: "ERROR ! Intente mas tarde" });
     }
   }
 
-  componentWillReceiveProps(newProps) {
-    console.log("newProps", newProps);
-  }
   componentDidMount() {
     const { firstProvinceHovered, hovered } = this.state
 
@@ -101,60 +95,36 @@ class MainPage extends Component {
   }
 
   getDatasets() {
-    const { dataCases } = this.state;
-
     runApiServer(0, "POST").then(
       (resolvedValue) => {
         const { response } = resolvedValue; // falta validar cuando hay un error OJO
-
         this.setState({ dataCases: response });
-        //console.log("END THE PROCESS", resolvedValue);
       }
     )
-
-    // const result = runApiServer(0, "POST", this, "dataCases");
-
-   // console.log("FINAL RESULT", result);
-
-    /*fetch("https://casoscovidcrbe.herokuapp.com/get-data-set-sesion", {method: "POST"})
-    .then(res => res.json())
-    .then(
-      (response) => {
-        console.log(response.result);
-        this.setState({ dataCases: response.result});
-      }
-    ) */
   }
 
-  filterDataFromSelectedProvince() {
-    const { selectedProvinceId, dataCases } = this.state
-
-    console.log("In functio nana", dataCases);
-    const filteredList = dataCases.filter((item) =>  (item.idprovincia.toString() === selectedProvinceId));
+  filterDataFromSelectedProvince(dataCases) {
+    const { selectedProvinceId } = this.state
+    const filteredList = dataCases.filter((item) =>  (item.idprovince.toString() === selectedProvinceId));
 
     return filteredList
   }
 
   render() {
-   const { headerText } = this.state
-    //confirmation 
+    const { headerText, dataCases } = this.state
+
     return (
       <div className="main-container">
         <div className="header-text">
           <h1>{headerText}</h1>
         </div>
-        {/*confirmation
-          && <div className="map-container">
-            <SVGMap map={Costarica} className={"map-wrapper"} onLocationClick={this._onProvinceHover} />
-          </div>
-        */}
         <div className="map-container">
           <SVGMap map={Costarica} className={"map-wrapper"} onLocationClick={this._onProvinceHover} />
         </div>
         <div className="map-text-container">
           <div className="province-title"><div>Provincia:</div> <strong>{this._getCurrentProvince()[0].name}</strong></div>
         </div>
-        <Collapsible dataCases={this.filterDataFromSelectedProvince()}/>
+        {dataCases.length !== 0 && <Collapsible dataCases={this.filterDataFromSelectedProvince(dataCases)}/>}
       </div>
     )
   }

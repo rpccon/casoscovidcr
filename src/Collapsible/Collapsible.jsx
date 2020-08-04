@@ -1,5 +1,9 @@
 import React, { Component } from 'react'
 import "./Collapsible.sass"
+import Row from "./Row/Row"
+import uniqid from "uniqid"
+import downArrow from "../Images/icon_arrow-down.png"
+import upArrow from "../Images/icon_arrow-up.png"
 
 class Collapsible extends Component {
   constructor(props) {
@@ -10,20 +14,7 @@ class Collapsible extends Component {
     }
   }
 
-  componentWillReceiveProps(newProps) {
-    this.setState({ dataCases: newProps.dataCases})
-  }
-
-  onItemCollapsibleClick = (context) => {
-    const parentTargetElement = context.target.parentElement
-    const contentElement = parentTargetElement.nextElementSibling
-
-    if(!contentElement.classList.contains("active")) {
-      contentElement.classList.add("active")
-    } else {
-      contentElement.classList.remove("active")
-    }
-  }
+  static getDerivedStateFromProps = (newProps) => (newProps)
 
   render() {
     const { dataCases } = this.state
@@ -31,14 +22,7 @@ class Collapsible extends Component {
     return (
       <div className="collapsible">
         <div className="collapsible-container">
-          {
-            dataCases.map((item) => (
-              <div key={`${item.id}-item-collapsible`} className="item-collapsible">
-                <div className="btn-collapse" onClick={this.onItemCollapsibleClick}><div className="name">{item.nombre}</div><div className="arrow"></div></div>
-                <div className="content-collapse">tableData</div>
-              </div>
-            ))
-          }
+          {dataCases.map((item, index) => (<Row key={uniqid()} rowData={item} />))}
         </div>
       </div>
     )

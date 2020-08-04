@@ -12,7 +12,8 @@
     "react-dom": "^16.13.1",
     "react-scripts": "3.4.1",
     "react-svg-map": "^2.1.2",
-    "serve": "^11.3.2"
+    "serve": "^11.3.2",
+    "uniqid": "^5.2.0"
   },
   "scripts": {
     "start": "serve -s build",
