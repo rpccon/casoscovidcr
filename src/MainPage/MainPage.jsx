@@ -18,7 +18,7 @@ class MainPage extends Component {
       confirmation: false,
       headerText: "Casos COVID-19 CR",
       dataCases: [],
-      lastDateUpdated: "20/05/2019"
+      lastDateUpdated: ""
     }
   }
 
@@ -92,7 +92,8 @@ class MainPage extends Component {
       this.setState({ firstProvinceHovered: true, provinces: theseProvincesArray });
     }
 
-    this.getDatasets();
+    this.getDatasets()
+    this.getLastDateUpdated()
   }
 
   getLastDataUpdated(version) {
@@ -104,6 +105,16 @@ class MainPage extends Component {
     )
   }
 
+  getLastDateUpdated() {
+    runApiServer(2, "POST").then(
+      (resolvedValue) => {
+        const { response } = resolvedValue;
+
+       this.setState({ lastDateUpdated: response[0].lastdate });
+      }
+    )
+  }
+  
   getDatasets() {
     runApiServer(0, "POST").then(
       (resolvedValue) => {

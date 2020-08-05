@@ -2,6 +2,7 @@ const serviceConfig = {
   domain: "https://casoscovidcrbe.herokuapp.com/",
   endpoints: [
     "get-data-set-sesion",
+    "get-last-date-updated",
     "get-last-date-updated"
   ]
 }
