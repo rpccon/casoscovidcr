@@ -35,15 +35,28 @@
           padding-left: 1rem
           color: white
           font-weight: bold
+          font-size: 17px
 
         .arrow
-          width: 8%
+          text-align: end
+          padding-right: 1rem
+          font-size: 15px
+          color: white
+          font-weight: bold
+
+          img
+            width: 16px
+            margin-top: 12px
+            padding-left: 13px
 
       .content-collapse
         display: none
 
-        &.active
+      &.active
+        .content-collapse
           display: block
+
+
 
   @media screen and (max-width: 1061px)
     .collapsible-container

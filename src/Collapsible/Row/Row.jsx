@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
-/* import downArrow from "../Images/icon_arrow-down.png"
-import upArrow from "../Images/icon_arrow-up.png" */
+import $ from "jquery"
+import downArrow from "../../Images/icon_arrow-down.png"
+import upArrow from "../../Images/icon_arrow-up.png"
 
 class Row extends Component {
   constructor(props) {
@@ -11,29 +12,30 @@ class Row extends Component {
 
     this.state = {
       rowId: id,
-      name
+      name,
+      isActive: false,
+      itemCollapse: "item-collapsible",
+      plusMsg: "Mostrar "
     }
   }
 
   onItemCollapsibleClick = (context) => {
-    const parentTargetElement = context.target.parentElement
-    const contentElement = parentTargetElement.nextElementSibling
+    const { isActive } = this.state
 
-    if(!contentElement.classList.contains("active")) {
-      contentElement.classList.add("active")
-    } else {
-      contentElement.classList.remove("active")
-    }
+    this.setState({ isActive: !isActive })
   }
 
   render() {
-    const { rowId, name } = this.state
+    const { rowId, name, isActive, itemCollapse, plusMsg } = this.state
+    const itemCollapseClass = isActive ? `${itemCollapse} active` : itemCollapse
+    const functionalArrow = isActive ? upArrow : downArrow
+    const arrowMessage = isActive ? `${plusMsg}menos` : `${plusMsg}más` 
 
     return (
-      <div key={`${rowId}-item-collapsible`} className="item-collapsible">
+      <div key={`${rowId}-item-collapsible`} className={itemCollapseClass}>
         <div className="btn-collapse" onClick={this.onItemCollapsibleClick}>
           <div className="name">{name}</div>
-          <div className="arrow"></div>
+          <div className="arrow">{arrowMessage}<img src={functionalArrow}/></div>
         </div>
         <div className="content-collapse">tableData</div>
       </div>
