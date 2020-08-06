@@ -5,6 +5,7 @@ import { SVGMap } from "react-svg-map"
 import runApiServer from "../service.config"
 import $ from "jquery"
 import "./MainPage.sass"
+import Loader from 'react-loader-spinner'
 
 class MainPage extends Component {
   constructor(props) {
@@ -147,7 +148,16 @@ class MainPage extends Component {
         <div className="map-text-container">
           <div className="province-title"><div>Provincia:</div> <strong>{this._getCurrentProvince()[0].name}</strong></div>
         </div>
-        {dataCases.length !== 0 && <Collapsible dataCases={this.filterDataFromSelectedProvince(dataCases)}/>}
+        {dataCases.length !== 0
+        ? <Loader
+          type="Oval"
+          color="#4583B2"
+          height={100}
+          width={100}
+          visible={true}
+          className={"loader"}
+        />
+        : <Collapsible dataCases={this.filterDataFromSelectedProvince(dataCases)}/>}
       </div>
     )
   }
