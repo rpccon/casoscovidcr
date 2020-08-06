@@ -148,7 +148,7 @@ class MainPage extends Component {
         <div className="map-text-container">
           <div className="province-title"><div>Provincia:</div> <strong>{this._getCurrentProvince()[0].name}</strong></div>
         </div>
-        {dataCases.length !== 0
+        {dataCases.length === 0
         ? <Loader
           type="Oval"
           color="#4583B2"
