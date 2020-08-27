@@ -12,6 +12,8 @@ class Collapsible extends Component {
     this.state = {
       dataCases: props.dataCases
     }
+
+    console.log("COLLAPSIBLE GET", this.state.dataCases)
   }
 
   static getDerivedStateFromProps = (newProps) => (newProps)

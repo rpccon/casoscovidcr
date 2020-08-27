@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
-import $ from "jquery"
 import downArrow from "../../Images/icon_arrow-down.png"
 import upArrow from "../../Images/icon_arrow-up.png"
+import TableBox from "./TableBox/TableBox"
 
 class Row extends Component {
   constructor(props) {
@@ -15,7 +15,8 @@ class Row extends Component {
       name,
       isActive: false,
       itemCollapse: "item-collapsible",
-      plusMsg: "Mostrar "
+      plusMsg: "Mostrar ",
+      rowData 
     }
   }
 
@@ -26,7 +27,7 @@ class Row extends Component {
   }
 
   render() {
-    const { rowId, name, isActive, itemCollapse, plusMsg } = this.state
+    const { rowId, name, isActive, itemCollapse, plusMsg, rowData } = this.state
     const itemCollapseClass = isActive ? `${itemCollapse} active` : itemCollapse
     const functionalArrow = isActive ? upArrow : downArrow
     const arrowMessage = isActive ? `${plusMsg}menos` : `${plusMsg}más` 
@@ -37,7 +38,9 @@ class Row extends Component {
           <div className="name">{name}</div>
           <div className="arrow">{arrowMessage}<img src={functionalArrow}/></div>
         </div>
-        <div className="content-collapse">tableData</div>
+        <div className="content-collapse">
+          <TableBox rowData={rowData} />
+        </div>
       </div>
     )
   }
