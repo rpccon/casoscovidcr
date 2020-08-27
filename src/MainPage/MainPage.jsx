@@ -51,7 +51,7 @@ class MainPage extends Component {
     const { currentTarget, srcElement } = context
     const eventTarget = currentTarget ? currentTarget : srcElement
     const currentProvinceId = $(eventTarget).attr("id");
-
+    console.log("TRYING BUILD WITH ", currentProvinceId)
     if(!$(eventTarget).hasClass(hovered)) {
       this._cleanProvincesSelected();
       $(eventTarget).addClass(hovered);

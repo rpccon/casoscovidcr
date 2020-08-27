@@ -18,15 +18,6 @@ class TableBox extends Component {
       accumulatedcases,
       alerts
     } = this.state.rowData
-    const { alert, desc } = alerts[0]
-    const descriptions = alerts.reduce((acc, item) => {
-      console.log(item)
-      if(item.desc) {
-        acc.push(item.desc)
-      }
-
-      return acc
-    }, [])
 
     return (
       <div className={"table-box-container"}>
@@ -59,16 +50,13 @@ class TableBox extends Component {
               <div>{accumulatedcases}</div>
             </div>
             <div classNam={"box-item"}>
-              <div>Permanece bajo alerta</div>
-              <div>{alert}</div>
+              <div>Permanece bajo alerta(s)</div>
+                {alerts.map((item) => (
+                  <div>
+                    {item.alert}{item.desc ? ":" : ""} {item.desc}
+                  </div>
+                ))}
             </div>
-          </div>
-          <div className={"fourth-set"}>
-            {descriptions.map((itemDesc) => (
-              <div>
-                {itemDesc}
-              </div>
-            ))}
           </div>
         </div>
       </div>
