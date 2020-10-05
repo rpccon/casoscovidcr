@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import "./TableBox.sass"
 
 class TableBox extends Component {
   constructor(props) {
@@ -22,33 +23,33 @@ class TableBox extends Component {
     return (
       <div className={"table-box-container"}>
         <div className={"first-block"}>
-          <div className={"first-set"}>
-            <div classNam={"box-item"}>
-              <div>Casos Nuevos</div>
+          <div className={"data-set"}>
+            <div className={"box-item"}>
+              <div>Nuevos</div>
               <div>{newcases}</div>
             </div>
-            <div classNam={"box-item"}>
-              <div>Casos Activos</div>
+            <div className={"box-item"}>
+              <div>Activos</div>
               <div>{activecases}</div>
             </div>
-          </div>
-          <div className={"second-set"}>
-            <div classNam={"box-item"}>
-              <div>Casos Recuperados</div>
+            <div className={"box-item"}>
+              <div>Recuperados</div>
               <div>{recoveredcases}</div>
             </div>
-            <div classNam={"box-item"}>
-              <div>Casos Fallecidos</div>
+          </div>
+          <div className={"data-set"}>
+            <div className={"box-item"}>
+              <div>Fallecidos</div>
               <div>{deceasedcases}</div>
+            </div>
+            <div className={"box-item"}>
+              <div>Acumulados</div>
+              <div>{accumulatedcases}</div>
             </div>
           </div>
         </div>
         <div className={"second-block"}>
           <div className={"third-set"}>
-            <div classNam={"box-item"}>
-              <div>Casos Acumulados</div>
-              <div>{accumulatedcases}</div>
-            </div>
             <div classNam={"box-item"}>
               <div>Permanece bajo alerta(s)</div>
                 {alerts.map((item) => (
