@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import "./TableBox.sass"
+import uniqid from "uniqid"
 
 class TableBox extends Component {
   constructor(props) {
@@ -20,40 +21,38 @@ class TableBox extends Component {
       alerts
     } = this.state.rowData
 
+    const arrayData = [
+      [
+        { title: "Nuevos", result: newcases },
+        { title: "Activos", result: activecases },
+        { title: "Recuperados", result: recoveredcases }
+      ],
+      [
+        { title: "Fallecidos", result: deceasedcases },
+        { title: "Acumulados", result: accumulatedcases }
+      ]
+    ]
+
     return (
       <div className={"table-box-container"}>
         <div className={"first-block"}>
-          <div className={"data-set"}>
-            <div className={"box-item"}>
-              <div>Nuevos</div>
-              <div>{newcases}</div>
+          {arrayData.map((setItem) => (
+            <div key={`${uniqid()}-set`} className={"data-set"}>
+              {setItem.map((boxItem) => (
+                <div key={`${uniqid()}-box`} className={"box-item"}>
+                  <div className="title">{boxItem.title}</div>
+                  <div className="result">{boxItem.result}</div>
+                </div>
+              ))}
             </div>
-            <div className={"box-item"}>
-              <div>Activos</div>
-              <div>{activecases}</div>
-            </div>
-            <div className={"box-item"}>
-              <div>Recuperados</div>
-              <div>{recoveredcases}</div>
-            </div>
-          </div>
-          <div className={"data-set"}>
-            <div className={"box-item"}>
-              <div>Fallecidos</div>
-              <div>{deceasedcases}</div>
-            </div>
-            <div className={"box-item"}>
-              <div>Acumulados</div>
-              <div>{accumulatedcases}</div>
-            </div>
-          </div>
+          ))}
         </div>
         <div className={"second-block"}>
           <div className={"third-set"}>
-            <div classNam={"box-item"}>
+            <div className={"box-item"}>
               <div>Permanece bajo alerta(s)</div>
                 {alerts.map((item) => (
-                  <div>
+                  <div key={uniqid()}>
                     {item.alert}{item.desc ? ":" : ""} {item.desc}
                   </div>
                 ))}
