@@ -7,9 +7,12 @@ class TableBox extends Component {
     super(props)
 
     this.state = {
-      rowData: props.rowData
+      rowData: props.rowData,
+      keepAlert: "Permanece bajo alerta"
     }
   }
+
+  addPlural = (size) => size > 1 ? "s" : ""
 
   render() {
     const {
@@ -48,15 +51,20 @@ class TableBox extends Component {
           ))}
         </div>
         <div className={"second-block"}>
-          <div className={"third-set"}>
-            <div className={"box-item"}>
-              <div>Permanece bajo alerta(s)</div>
-                {alerts.map((item) => (
-                  <div key={uniqid()}>
-                    {item.alert}{item.desc ? ":" : ""} {item.desc}
-                  </div>
-                ))}
-            </div>
+          <div className={"title"}>{`${this.state.keepAlert}${this.addPlural(alerts.length)}`}</div>
+          <div className={"alerts-set"}>
+            {alerts.map((alertItem) => (
+              <div key={uniqid()} className={"alert-item"}>
+                <div className={"title"}>
+                  {`${alertItem.alert.charAt(0).toUpperCase()}${alertItem.alert.slice(1)}`}
+                </div>
+                <div className={`dot ${alertItem.alert}`}></div>
+                {
+                  alertItem.desc
+                  && <div className={"desc"}>{alertItem.desc}</div>
+                }
+              </div>
+            ))}
           </div>
         </div>
       </div>
