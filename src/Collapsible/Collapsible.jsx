@@ -2,8 +2,7 @@ import React, { Component } from 'react'
 import "./Collapsible.sass"
 import Row from "./Row/Row"
 import uniqid from "uniqid"
-import downArrow from "../Images/icon_arrow-down.png"
-import upArrow from "../Images/icon_arrow-up.png"
+import ContactShare from "../ContactShare/ContactShare"
 
 class Collapsible extends Component {
   constructor(props) {
@@ -26,6 +25,7 @@ class Collapsible extends Component {
         <div className="collapsible-container">
           {dataCases.map((item, index) => (<Row key={uniqid()} rowData={item} />))}
         </div>
+        <ContactShare />
       </div>
     )
   }
