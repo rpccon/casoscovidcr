@@ -144,6 +144,7 @@ class MainPage extends Component {
         <div className="map-container">
           <SVGMap map={Costarica} className={"map-wrapper"} onLocationClick={this._onProvinceHover} />
         </div>
+        <div className="info-selection"><span>(</span>Seleccione una provincia<span>)</span></div>
         <div className="map-text-container">
           <div className="province-title"><div>Provincia:</div> <strong>{this._getCurrentProvince()[0].name}</strong></div>
         </div>

@@ -21,6 +21,7 @@ class Collapsible extends Component {
     return (
       <div className="collapsible">
         <div className="collapsible-container">
+          <div className={"title-info"}>Información de casos:</div>
           {dataCases.map((item, index) => (<Row key={uniqid()} rowData={item} />))}
         </div>
         <ContactShare />
