@@ -1,5 +1,9 @@
 
 .table-box-container
+  border: 2px solid black
+  border-radius: 7px
+  margin-left: 1px
+
   .first-block
     .data-set
       display: flex
@@ -10,12 +14,9 @@
         flex-direction: column
         justify-content: center
         text-align: center
-        border: 2px solid
         width: 38rem
         height: 7rem
-        border-radius: 6px
         margin-bottom: 1px
-        background-color: darkgray
 
         .title
           font-size: 17px
@@ -23,13 +24,23 @@
         .result
           font-size: 30px
           font-weight: bold
+        
+        &.news
+          .result
+            color: blue
 
-      &:nth-child(odd)
-        .box-item:nth-child(odd)
-          background-color: skyblue
-      &:nth-child(even)
-        .box-item:nth-child(even)
-          background-color: skyblue
+        &.active
+          .result
+            color: orange
+
+        &.recovered
+          .result
+            color: green
+
+        &.killed
+          .result
+            color: red
+
   .second-block
     text-align: center
 

@@ -26,13 +26,13 @@ class TableBox extends Component {
 
     const arrayData = [
       [
-        { title: "Nuevos", result: newcases },
-        { title: "Activos", result: activecases },
-        { title: "Recuperados", result: recoveredcases }
+        { title: "Nuevos", result: newcases, class: "news" },
+        { title: "Activos", result: activecases, class: "active" },
+        { title: "Recuperados", result: recoveredcases, class: "recovered" }
       ],
       [
-        { title: "Fallecidos", result: deceasedcases },
-        { title: "Acumulados", result: accumulatedcases }
+        { title: "Fallecidos", result: deceasedcases, class: "killed" },
+        { title: "Acumulados", result: accumulatedcases, class: "accumulated" }
       ]
     ]
 
@@ -42,7 +42,7 @@ class TableBox extends Component {
           {arrayData.map((setItem) => (
             <div key={`${uniqid()}-set`} className={"data-set"}>
               {setItem.map((boxItem) => (
-                <div key={`${uniqid()}-box`} className={"box-item"}>
+                <div key={`${uniqid()}-box`} className={`box-item ${boxItem.class}`}>
                   <div className="title">{boxItem.title}</div>
                   <div className="result">{boxItem.result}</div>
                 </div>
@@ -50,7 +50,9 @@ class TableBox extends Component {
             </div>
           ))}
         </div>
-        <div className={"second-block"}>
+        {alerts.length > 0
+          &&
+          <div className={"second-block"}>
           <div className={"title"}>{`${this.state.keepAlert}${this.addPlural(alerts.length)}`}</div>
           <div className={"alerts-set"}>
             {alerts.map((alertItem) => (
@@ -67,6 +69,7 @@ class TableBox extends Component {
             ))}
           </div>
         </div>
+        }
       </div>
     )
   }

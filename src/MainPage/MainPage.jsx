@@ -51,13 +51,11 @@ class MainPage extends Component {
     const { currentTarget, srcElement } = context
     const eventTarget = currentTarget ? currentTarget : srcElement
     const currentProvinceId = $(eventTarget).attr("id");
-    console.log("TRYING BUILD WITH ", currentProvinceId)
+
     if(!$(eventTarget).hasClass(hovered)) {
       this._cleanProvincesSelected();
       $(eventTarget).addClass(hovered);
       this.setState({ selectedProvinceId: currentProvinceId });
-    } else {
-      $(eventTarget).removeClass(hovered);
     }
   }
 
@@ -133,9 +131,10 @@ class MainPage extends Component {
   }
 
   render() {
-    const { headerText, dataCases, lastDateUpdated } = this.state
+    const { headerText, dataCases } = this.state
 
     return (
+      <div>
       <div className="main-container">
         {this.getLastDataUpdated("desktop")}
         <div className="header-text">
@@ -148,6 +147,7 @@ class MainPage extends Component {
         <div className="map-text-container">
           <div className="province-title"><div>Provincia:</div> <strong>{this._getCurrentProvince()[0].name}</strong></div>
         </div>
+        
         {dataCases.length === 0
         ? <Loader
           type="Oval"
@@ -158,6 +158,7 @@ class MainPage extends Component {
           className={"loader"}
         />
         : <Collapsible dataCases={this.filterDataFromSelectedProvince(dataCases)}/>}
+      </div>
       </div>
     )
   }
