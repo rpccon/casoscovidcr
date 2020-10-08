@@ -27,12 +27,19 @@ class Row extends Component {
 
   render() {
     const { rowId, name, isActive, itemCollapse, rowData } = this.state
-    const itemCollapseClass = isActive ? `${itemCollapse} active` : itemCollapse
-    const functionalArrow = isActive ? upArrow : downArrow
+    let itemCollapseClass = itemCollapse
+    let functionalArrow
+
+    if(isActive) {
+      itemCollapseClass = `${itemCollapse} active`
+      functionalArrow = upArrow
+    } else {
+      functionalArrow = downArrow
+    }
 
     return (
       <div key={`${rowId}-item-collapsible`} className={itemCollapseClass}>
-        <div className="btn-collapse" onClick={this.onItemCollapsibleClick}>
+        <div className={"btn-collapse"} onClick={this.onItemCollapsibleClick}>
           <div className="name">{name}</div>
           <div className="arrow"><img src={functionalArrow} alt="" /></div>
         </div>
