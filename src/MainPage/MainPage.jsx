@@ -123,15 +123,8 @@ class MainPage extends Component {
     )
   }
 
-  filterDataFromSelectedProvince(dataCases) {
-    const { selectedProvinceId } = this.state
-    const filteredList = dataCases.filter((item) =>  (item.idprovince.toString() === selectedProvinceId));
-
-    return filteredList
-  }
-
   render() {
-    const { headerText, dataCases } = this.state
+    const { headerText, dataCases, selectedProvinceId } = this.state
 
     return (
       <div>
@@ -158,7 +151,7 @@ class MainPage extends Component {
           visible={true}
           className={"loader"}
         />
-        : <Collapsible dataCases={this.filterDataFromSelectedProvince(dataCases)}/>}
+        : <Collapsible selectedProvinceId={selectedProvinceId} dataCases={dataCases} />}
       </div>
       </div>
     )
