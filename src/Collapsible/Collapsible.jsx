@@ -17,6 +17,7 @@ class Collapsible extends Component {
   }
 
   filterDataFromSelectedProvince(dataCases) {
+    console.log("these are data cases", dataCases);
     const { selectedProvinceId } = this.state
     const filteredList = dataCases.filter((item) =>  (item.idprovince.toString() === selectedProvinceId));
 
@@ -57,6 +58,16 @@ class Collapsible extends Component {
 
   static getDerivedStateFromProps = (newProps) => (newProps)
 
+
+  /*
+  
+  
+          <div className={`${national}-resume`}>
+          <div className={"title-info resume"}>Resumen a nivel nacional</div>
+          <TableBox rowData={this.generateTotalNumbers(dataCases)} class={`${national}-info`}/>
+        </div>
+  */
+
   render() {
     const { dataCases, national } = this.state
 
@@ -67,10 +78,6 @@ class Collapsible extends Component {
         <div className="collapsible-container">
           <div className={"title-info"}>Información de casos:</div>
           {filteredDataCases.map((item, index) => (<Row key={uniqid()} rowData={item} />))}
-        </div>
-        <div className={`${national}-resume`}>
-          <div className={"title-info resume"}>Resumen a nivel nacional</div>
-          <TableBox rowData={this.generateTotalNumbers(dataCases)} class={`${national}-info`}/>
         </div>
         <ContactShare />
       </div>
