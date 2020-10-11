@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import downArrow from "../../Images/icon_arrow-down.png"
 import upArrow from "../../Images/icon_arrow-up.png"
-import TableBox from "./TableBox/TableBox"
+import TableBox from "../../TableBox/TableBox"
 
 class Row extends Component {
   constructor(props) {

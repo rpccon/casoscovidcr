@@ -3,7 +3,7 @@ import Costarica from "../map/countryObject"
 import Collapsible from "../Collapsible/Collapsible"
 import { SVGMap } from "react-svg-map"
 import runApiServer from "../service.config"
-import $ from "jquery"
+import $, { data } from "jquery"
 import "./MainPage.sass"
 import Loader from 'react-loader-spinner'
 
@@ -123,16 +123,9 @@ class MainPage extends Component {
     )
   }
 
-  filterDataFromSelectedProvince(dataCases) {
-    const { selectedProvinceId } = this.state
-    const filteredList = dataCases.filter((item) =>  (item.idprovince.toString() === selectedProvinceId));
-
-    return filteredList
-  }
-
   render() {
-    const { headerText, dataCases } = this.state
-
+    const { headerText, dataCases, selectedProvinceId } = this.state
+    console.log("These are data cases", dataCases);
     return (
       <div>
       <div className="main-container">
@@ -158,7 +151,7 @@ class MainPage extends Component {
           visible={true}
           className={"loader"}
         />
-        : <Collapsible dataCases={this.filterDataFromSelectedProvince(dataCases)}/>}
+        : <Collapsible selectedProvinceId={selectedProvinceId} dataCases={dataCases} />}
       </div>
       </div>
     )

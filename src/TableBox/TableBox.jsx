@@ -8,7 +8,8 @@ class TableBox extends Component {
 
     this.state = {
       rowData: props.rowData,
-      keepAlert: "Permanece bajo alerta"
+      keepAlert: "Permanece bajo alerta",
+      classItem: props.class
     }
   }
 
@@ -16,13 +17,16 @@ class TableBox extends Component {
 
   render() {
     const {
-      newcases,
-      activecases,
-      recoveredcases,
-      deceasedcases,
-      accumulatedcases,
-      alerts
-    } = this.state.rowData
+      classItem,
+      rowData: {
+        newcases,
+        activecases,
+        recoveredcases,
+        deceasedcases,
+        accumulatedcases,
+        alerts
+      }
+    } = this.state
 
     const arrayData = [
       [
@@ -36,8 +40,12 @@ class TableBox extends Component {
       ]
     ]
 
+    let tableBoxClass = "table-box-container"
+
+    if(classItem) tableBoxClass = `${tableBoxClass} ${classItem}`
+
     return (
-      <div className={"table-box-container"}>
+      <div className={tableBoxClass}>
         <div className={"first-block"}>
           {arrayData.map((setItem) => (
             <div key={`${uniqid()}-set`} className={"data-set"}>
