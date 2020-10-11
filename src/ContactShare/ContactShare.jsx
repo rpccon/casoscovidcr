@@ -11,7 +11,7 @@ const ContactShare = () => (
       <div className={"icons"}>
         <a target="_blank" rel="noopener noreferrer" href="https://www.facebook.com/roberto.salazar.752"><img src={facebookIcon} alt="Facebook contact" /></a>
         <a target="_blank" rel="noopener noreferrer" href="https://www.linkedin.com/in/roberto-salazar-mel%C3%A9ndez-49a58015b/"><img src={linkedinIcon} alt="Linkedin contact" /></a>
-        <a href="mailto:robertopccon@gmail.com"><img src={facebookIcon} className={"gmail"} alt="Gmail contact" /></a>
+        <a href="mailto:robertopccon@gmail.com"><img src={gmailIcon} className={"gmail"} alt="Gmail contact" /></a>
       </div>
     </div>
     <div className={"share"}>
