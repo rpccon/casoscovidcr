@@ -4,6 +4,9 @@
   font-size: 20px
   padding-bottom: 12px
 
+  &.resume
+    width: 39rem
+
 .collapsible
   position: absolute
   width: 100%
@@ -17,12 +20,9 @@
     align-items: center
     margin-top: 5rem
 
-    .title-info
-      width: 39rem
-
-    .national-info
-      width: 41rem
-      margin-left: 2.3rem
+  .national-info
+    width: 41rem
+    margin-left: 2.3rem
 
   .collapsible-container
     display: flex
@@ -32,7 +32,7 @@
     align-items: center
     margin-left: 2rem
 
-    .item-collapsible
+  .item-collapsible
       width: 41rem
 
       .btn-collapse, div
@@ -86,25 +86,18 @@
 
 
   @media screen and (max-width: 1061px)
-    .collapsible-container
-      .item-collapsible, .title-info
-          width: 36rem
-    
-    .national-resume .national-info
-      width: 36rem
+    .item-collapsible, .title-info, .national-info
+        width: 36rem
+
+        &.resume
+          width: 33.9rem
             
     
   @media screen and (max-width: 650px)
     top: 20rem
 
-    .collapsible-container
+    .collapsible-container, .national-info
       margin-left: 0
 
-      .item-collapsible, .title-info
-        width: 88%
-
-    .national-resume
-
-      .national-info
-        width: 88%
-        margin-left: 0
+    .item-collapsible, .title-info, .title-info.resume, .national-info
+      width: 88%

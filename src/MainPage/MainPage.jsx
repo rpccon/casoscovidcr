@@ -3,7 +3,7 @@ import Costarica from "../map/countryObject"
 import Collapsible from "../Collapsible/Collapsible"
 import { SVGMap } from "react-svg-map"
 import runApiServer from "../service.config"
-import $, { data } from "jquery"
+import $ from "jquery"
 import "./MainPage.sass"
 import Loader from 'react-loader-spinner'
 
@@ -125,7 +125,7 @@ class MainPage extends Component {
 
   render() {
     const { headerText, dataCases, selectedProvinceId } = this.state
-    console.log("These are data cases", dataCases);
+
     return (
       <div>
       <div className="main-container">

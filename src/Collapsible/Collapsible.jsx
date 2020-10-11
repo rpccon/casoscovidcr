@@ -69,7 +69,7 @@ class Collapsible extends Component {
           {filteredDataCases.map((item, index) => (<Row key={uniqid()} rowData={item} />))}
         </div>
         <div className={`${national}-resume`}>
-          <div class="title-info">Resumen a nivel nacional</div>
+          <div className={"title-info resume"}>Resumen a nivel nacional</div>
           <TableBox rowData={this.generateTotalNumbers(dataCases)} class={`${national}-info`}/>
         </div>
         <ContactShare />
