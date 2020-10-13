@@ -17,7 +17,6 @@ class Collapsible extends Component {
   }
 
   filterDataFromSelectedProvince(dataCases) {
-    console.log("these are data cases", dataCases);
     const { selectedProvinceId } = this.state
     const filteredList = dataCases.filter((item) =>  (item.idprovince.toString() === selectedProvinceId));
 
